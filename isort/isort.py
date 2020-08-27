@@ -961,7 +961,11 @@ class SortImports(object):
                             import_string = import_string.rstrip().rstrip("\\") + " " + line.lstrip()
 
                 if import_type == "from":
-                    import_string = import_string.replace("import(", "import (")
+                    import_string = (
+                        import_string.replace("import(", "import (")
+                        .replace("\\", " ")
+                        .replace("\n", " ")
+                    )
                     parts = import_string.split(" import ")
                     from_import = parts[0].split(" ")
                     import_string = " import ".join([from_import[0] + " " + "".join(from_import[1:])] + parts[1:])
